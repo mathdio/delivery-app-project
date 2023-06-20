@@ -17,10 +17,12 @@ function Header() {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
-    if (!user.token) history.push('/login');
-
-    setUserName(user.name);
-    setRole(user.role);
+    if (!user || !user.token) {
+      history.push('/login');
+    } else {
+      setUserName(user.name);
+      setRole(user.role);
+    }
   }, []);
 
   const handleLogOut = () => {

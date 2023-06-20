@@ -26,7 +26,6 @@ function CustomerOrderDetails({ match }) {
     const data = await response.json();
     setSpecificOrder(data);
     setLoading(false);
-    console.log(specificOrder);
   };
 
   useEffect(() => {

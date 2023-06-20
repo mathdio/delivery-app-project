@@ -17,7 +17,6 @@ function LogIn() {
   const history = useHistory();
 
   useEffect(() => {
-    localStorage.clear();
     document.title = 'Login - Delivery App';
     const user = JSON.parse(localStorage.getItem('user'));
     if (user) history.push('/customer/products');
