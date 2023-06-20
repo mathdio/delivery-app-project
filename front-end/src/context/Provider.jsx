@@ -112,7 +112,13 @@ function Provider({ children }) {
   };
 
   useEffect(() => {
-    if (!localStorage.getItem('user')) history.push('/login');
+    if (!localStorage.getItem('user')) {
+      if (history.location.pathname === '/register') {
+        history.push('/register');
+      } else {
+        history.push('/login');
+      }
+    }
     fetchProducts();
     fetchSellers();
   }, []);
