@@ -68,9 +68,23 @@ const registerByAdmin = async (name, email, password, role) => {
   return createdUser.get({ plain: true });
 };
 
+const getUsersToManage = async () => {
+  const users = await User.findAll({
+    where: {
+      [Op.or]: [
+        { role: 'customer' },
+        { role: 'seller' },
+      ],
+    },
+    raw: true,
+  });
+  return users;
+};
+
 module.exports = {
   login,
   register,
   getSellers,
   registerByAdmin,
+  getUsersToManage,
 };

@@ -8,6 +8,7 @@ import { EMAIL,
   REGISTER,
   ROLE,
   ROUTE } from '../dataTestedId/AdminManageIds';
+import ManageTable from '../components/ManageTable';
 
 function AdminManage() {
   const [user, setUser] = useState();
@@ -17,6 +18,7 @@ function AdminManage() {
   const [role, setRole] = useState();
   const [disableButton, setDisableButton] = useState(true);
   const [conflict, setConflict] = useState(false);
+  const [usersTable, setUsersTable] = useState([]);
   const history = useHistory();
 
   useEffect(() => {
@@ -29,6 +31,30 @@ function AdminManage() {
       setUser(localStorageUser);
     }
   }, []);
+
+  const fetchUsers = async () => {
+    const response = await fetch(
+      'http://localhost:3001/admin/users',
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+          'Access-Control-Allow-Methods': 'POST, PUT, PATCH, GET, DELETE, OPTIONS',
+          authorization: user.token,
+        },
+      },
+    );
+
+    const data = await response.json();
+    console.log(data);
+    setUsersTable(data);
+  };
+
+  useEffect(() => {
+    if (user) fetchUsers();
+  }, [user]);
 
   useEffect(() => {
     const regex = /\S+@\S+\.\S+/;
@@ -70,6 +96,8 @@ function AdminManage() {
     const CONFLICT_STATUS = 409;
     if (response.status === CONFLICT_STATUS) {
       setConflict(true);
+    } else {
+      await fetchUsers();
     }
   };
 
@@ -135,6 +163,7 @@ function AdminManage() {
             CADASTRAR
           </button>
         </form>
+        <ManageTable users={ usersTable } />
       </main>
     </div>
   );

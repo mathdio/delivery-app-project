@@ -38,9 +38,15 @@ const registerByAdmin = async (req, res) => {
   return res.status(201).json(user);
 };
 
+const getUsersToManage = async (_req, res) => {
+  const users = await usersService.getUsersToManage();
+  return res.status(200).json(users);
+};
+
 module.exports = {
   login,
   register,
   getSellers,
   registerByAdmin,
+  getUsersToManage,
 };
