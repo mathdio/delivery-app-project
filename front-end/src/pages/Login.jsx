@@ -75,6 +75,8 @@ function LogIn() {
     if (response.status === OK_STATUS) {
       if (user.role === 'seller') {
         history.push('/seller/orders');
+      } else if (user.role === 'administrator') {
+        history.push('/admin/manage');
       } else {
         history.push('/customer/products');
       }
