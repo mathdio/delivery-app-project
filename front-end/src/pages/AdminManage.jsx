@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import Header from '../components/Header';
 import { EMAIL,
   NAME,
@@ -8,14 +9,23 @@ import { EMAIL,
   ROUTE } from '../dataTestedId/AdminManageIds';
 
 function AdminManage() {
+  const [user, setUser] = useState();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState();
   const [disableButton, setDisableButton] = useState(true);
+  const history = useHistory();
 
   useEffect(() => {
     document.title = 'Manager Area- Delivery App';
+
+    const localStorageUser = JSON.parse(localStorage.getItem('user'));
+    if (!localStorageUser || !localStorageUser.token) {
+      history.push('/login');
+    } else {
+      setUser(localStorageUser);
+    }
   }, []);
 
   useEffect(() => {
@@ -31,6 +41,32 @@ function AdminManage() {
       setDisableButton(true);
     }
   }, [name, email, password, role]);
+
+  const handleSubmit = async () => {
+    const requestBody = {
+      name,
+      email,
+      password,
+      role,
+    };
+
+    await fetch(
+      'http://localhost:3001/admin/register',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+          'Access-Control-Allow-Methods': 'POST, PUT, PATCH, GET, DELETE, OPTIONS',
+          authorization: user.token,
+        },
+        body: JSON.stringify(requestBody),
+      },
+    );
+
+    // const data = await response.json();
+  };
 
   return (
     <div>
@@ -83,6 +119,7 @@ function AdminManage() {
             type="button"
             data-testid={ `${ROUTE}${REGISTER}` }
             disabled={ disableButton }
+            onClick={ handleSubmit }
           >
             CADASTRAR
           </button>

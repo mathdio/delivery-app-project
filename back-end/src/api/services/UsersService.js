@@ -10,6 +10,15 @@ const validateEncryption = (password, passwordDb) => {
   }
 };
 
+const inDatabaseValidation = async (name, email) => {
+  const user = await User.findOne({
+    where: { 
+      [Op.or]: [{ name }, { email }],
+    },
+  });
+  return user;
+};
+
 const login = async (email, password) => {
   const user = await User.findOne({
     where: { email },
@@ -24,11 +33,12 @@ const login = async (email, password) => {
 };
 
 const register = async (name, email, password) => {
-  const user = await User.findOne({
-    where: { 
-      [Op.or]: [{ name }, { email }],
-    },
-  });
+  // const user = await User.findOne({
+  //   where: { 
+  //     [Op.or]: [{ name }, { email }],
+  //   },
+  // });
+  const user = await inDatabaseValidation(name, email);
   if (user) return -1;
 
   const passwordEncrypted = md5(password);
@@ -49,8 +59,23 @@ const getSellers = async () => {
   return sellers;
 };
 
+const registerByAdmin = async (name, email, password, role) => {
+  const user = await inDatabaseValidation(name, email);
+  if (user) return -1;
+
+  const passwordEncrypted = md5(password);
+  const createdUser = await User.create({
+    name,
+    email,
+    password: passwordEncrypted,
+    role,
+  });
+  return createdUser.get({ plain: true });
+};
+
 module.exports = {
   login,
   register,
   getSellers,
+  registerByAdmin,
 };
