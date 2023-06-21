@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import Header from '../components/Header';
 import { EMAIL,
+  INVALID,
   NAME,
   PASSWORD,
   REGISTER,
@@ -15,6 +16,7 @@ function AdminManage() {
   const [password, setPassword] = useState('');
   const [role, setRole] = useState();
   const [disableButton, setDisableButton] = useState(true);
+  const [conflict, setConflict] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -50,7 +52,7 @@ function AdminManage() {
       role,
     };
 
-    await fetch(
+    const response = await fetch(
       'http://localhost:3001/admin/register',
       {
         method: 'POST',
@@ -65,13 +67,22 @@ function AdminManage() {
       },
     );
 
-    // const data = await response.json();
+    const CONFLICT_STATUS = 409;
+    if (response.status === CONFLICT_STATUS) {
+      setConflict(true);
+    }
   };
 
   return (
     <div>
       <Header />
       <main>
+        {conflict && (
+          <span
+            data-testid={ `${ROUTE}${INVALID}` }
+          >
+            Name or e-mail already exists in users database.
+          </span>)}
         <form>
           <input
             type="text"
