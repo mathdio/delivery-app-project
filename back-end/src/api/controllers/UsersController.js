@@ -35,7 +35,7 @@ const registerByAdmin = async (req, res) => {
   const { name, email, password, role } = req.body;
   const user = await usersService.registerByAdmin(name, email, password, role);
   if (user === -1) return res.status(409).json({ message: 'Name or e-mail conflict' });
-  return res.status(201).end();
+  return res.status(201).json(user);
 };
 
 module.exports = {

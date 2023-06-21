@@ -33,11 +33,6 @@ const login = async (email, password) => {
 };
 
 const register = async (name, email, password) => {
-  // const user = await User.findOne({
-  //   where: { 
-  //     [Op.or]: [{ name }, { email }],
-  //   },
-  // });
   const user = await inDatabaseValidation(name, email);
   if (user) return -1;
 
