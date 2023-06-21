@@ -20,11 +20,11 @@ function LogIn() {
     document.title = 'Login - Delivery App';
     const user = JSON.parse(localStorage.getItem('user'));
     if (user) {
-      if (user.token === 'customer') {
+      if (user.role === 'customer') {
         history.push('/customer/products');
-      } else if (user.token === 'administrator') {
+      } else if (user.role === 'administrator') {
         history.push('/admin/register');
-      } else if (user.token === 'seller') {
+      } else if (user.role === 'seller') {
         history.push('/seller/orders');
       }
     }
@@ -83,7 +83,7 @@ function LogIn() {
     if (response.status === OK_STATUS) {
       if (user.role === 'seller') {
         history.push('/seller/orders');
-      } if (user.role === 'administrator') {
+      } else if (user.role === 'administrator') {
         history.push('/admin/manage');
       } else {
         history.push('/customer/products');
