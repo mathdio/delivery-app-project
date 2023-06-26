@@ -29,7 +29,7 @@ const login = async (email, password) => {
     validateEncryption(md5(password), user.password);
   }
 
-  return user;
+  return { name: user.name, email: user.email, role: user.role };
 };
 
 const register = async (name, email, password) => {
@@ -43,7 +43,9 @@ const register = async (name, email, password) => {
     password: passwordEncrypted,
     role: 'customer',
   });
-  return createdUser.get({ plain: true });
+
+  const plainUser = createdUser.get({ plain: true });
+  return { name: plainUser.name, email: plainUser.email, role: plainUser.role };
 };
 
 const getSellers = async () => {
