@@ -10,6 +10,10 @@ import { EMAIL,
   ROUTE } from '../dataTestedId/AdminManageIds';
 import ManageTable from '../components/ManageTable';
 
+const CONTENT_TYPE = 'application/json';
+const ALLOW_HEADERS = 'Content-Type, Authorization';
+const ALLOW_METHODS = 'POST, PUT, PATCH, GET, DELETE, OPTIONS';
+
 function AdminManage() {
   const [user, setUser] = useState();
   const [name, setName] = useState('');
@@ -38,10 +42,10 @@ function AdminManage() {
       {
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': CONTENT_TYPE,
           'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-          'Access-Control-Allow-Methods': 'POST, PUT, PATCH, GET, DELETE, OPTIONS',
+          'Access-Control-Allow-Headers': ALLOW_HEADERS,
+          'Access-Control-Allow-Methods': ALLOW_METHODS,
           authorization: user.token,
         },
       },
@@ -83,10 +87,10 @@ function AdminManage() {
       {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': CONTENT_TYPE,
           'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-          'Access-Control-Allow-Methods': 'POST, PUT, PATCH, GET, DELETE, OPTIONS',
+          'Access-Control-Allow-Headers': ALLOW_HEADERS,
+          'Access-Control-Allow-Methods': ALLOW_METHODS,
           authorization: user.token,
         },
         body: JSON.stringify(requestBody),
@@ -99,6 +103,24 @@ function AdminManage() {
     } else {
       await fetchUsers();
     }
+  };
+
+  const handleRemove = async (id) => {
+    await fetch(
+      `http://localhost:3001/admin/remove/${id}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': CONTENT_TYPE,
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': ALLOW_HEADERS,
+          'Access-Control-Allow-Methods': ALLOW_METHODS,
+          authorization: user.token,
+        },
+      },
+    );
+
+    await fetchUsers();
   };
 
   return (
@@ -163,7 +185,7 @@ function AdminManage() {
             CADASTRAR
           </button>
         </form>
-        <ManageTable users={ usersTable } />
+        <ManageTable users={ usersTable } handleRemove={ handleRemove } />
       </main>
     </div>
   );

@@ -43,10 +43,20 @@ const getUsersToManage = async (_req, res) => {
   return res.status(200).json(users);
 };
 
+const deleteUser = async (req, res) => {
+  const id = Number(req.params.id);
+  const user = await usersService.getUser(id);
+  if (user) {
+    await usersService.deleteUser(id);
+    return res.status(204).end();
+  }
+};
+
 module.exports = {
   login,
   register,
   getSellers,
   registerByAdmin,
   getUsersToManage,
+  deleteUser,
 };

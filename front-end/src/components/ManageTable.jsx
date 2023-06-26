@@ -7,7 +7,7 @@ import { EMAIL_TABLE,
   ROLE_TABLE,
   ROUTE } from '../dataTestedId/AdminManageIds';
 
-function ManageTable({ users }) {
+function ManageTable({ users, handleRemove }) {
   return (
     <table>
       <thead>
@@ -20,7 +20,7 @@ function ManageTable({ users }) {
         </tr>
       </thead>
       <tbody>
-        {users.map(({ name, email, role }, index) => (
+        {users.map(({ id, name, email, role }, index) => (
           <tr key={ index }>
             <td data-testid={ `${ROUTE}${ITEM_NUMBER}${index}` }>{index}</td>
             <td data-testid={ `${ROUTE}${NAME_TABLE}${index}` }>{name}</td>
@@ -29,6 +29,7 @@ function ManageTable({ users }) {
             <td data-testid={ `${ROUTE}${REMOVE_TABLE}${index}` }>
               <button
                 type="button"
+                onClick={ () => handleRemove(id) }
               >
                 Excluir
               </button>
