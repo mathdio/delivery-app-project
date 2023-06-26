@@ -4,9 +4,9 @@ const chaiHttp = require('chai-http');
 const { loginInputMock, 
   userMock, 
   createdRegisterMock, 
-  registerInputMock } = require('./Users.mock');
-const usersService = require('../api/services/UsersService');
-const app = require('../api/app');
+  registerInputMock } = require('./mocks/Users.mock');
+const usersService = require('../../api/services/UsersService');
+const app = require('../../api/app');
 
 chai.use(chaiHttp);
 const { expect } = chai;
