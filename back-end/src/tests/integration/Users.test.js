@@ -4,7 +4,8 @@ const chaiHttp = require('chai-http');
 const { loginInputMock, 
   userMock, 
   createdRegisterMock, 
-  registerInputMock } = require('./mocks/Users.mock');
+  registerInputMock, 
+  sellersMock } = require('./mocks/Users.mock');
 const usersService = require('../../api/services/UsersService');
 const app = require('../../api/app');
 
@@ -44,5 +45,13 @@ describe('/users routes tests', function () {
     const response = await chai.request(app).post('/users/register').send(registerInputMock);
     expect(response.status).to.be.eq(409);
     expect(response.body).to.deep.eq({ message: 'Name or e-mail conflict' });
+  });
+
+  it('successful sellers request', async function () {
+    sinon.stub(usersService, 'getSellers').resolves(sellersMock);
+
+    const response = await chai.request(app).get('/users/sellers');
+    expect(response.status).to.be.eq(200);
+    expect(response.body).to.deep.eq(sellersMock);
   });
 });

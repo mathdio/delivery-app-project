@@ -52,6 +52,7 @@ const getSellers = async () => {
   const sellers = await User.findAll({
     where: { role: 'seller' },
     raw: true,
+    attributes: { exclude: ['password'] },
   });
   return sellers;
 };

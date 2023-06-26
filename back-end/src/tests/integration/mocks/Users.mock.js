@@ -21,9 +21,17 @@ const createdRegisterMock = {
   role: 'customer',
 };
 
+const sellersMock = [{
+    id: 2,
+    name: 'Fulana Pereira',
+    email: 'fulana@deliveryapp.com',
+    role: 'seller',
+  }];
+
 module.exports = {
   loginInputMock, 
   userMock,
   registerInputMock,
   createdRegisterMock,
+  sellersMock,
 };

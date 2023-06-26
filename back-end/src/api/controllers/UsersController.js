@@ -23,11 +23,10 @@ const register = async (req, res) => {
   const user = await usersService.register(name, email, password);
   if (user === -1) return res.status(409).json({ message: 'Name or e-mail conflict' });
   const token = validateLogin(user);
-  console.log(user);
   return res.status(201).json({ ...user, token });
 };
 
-const getSellers = async (req, res) => {
+const getSellers = async (_req, res) => {
   const sellers = await usersService.getSellers();
   return res.status(200).json(sellers);
 };
