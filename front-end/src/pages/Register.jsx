@@ -85,6 +85,7 @@ function Register() {
         alt=""
         className="Register-logo-img"
       />
+      <h1>Cadastre uma nova conta</h1>
       <form className="Register-form">
         <label htmlFor="name">
           Nome

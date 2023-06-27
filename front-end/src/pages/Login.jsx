@@ -94,6 +94,7 @@ function LogIn() {
   return (
     <div className="Login-main-div">
       <img src={ logo } alt="" className="Login-logo-img" />
+      <h1>Entre na sua conta</h1>
       <form className="Login-form">
         <label
           htmlFor="email"
