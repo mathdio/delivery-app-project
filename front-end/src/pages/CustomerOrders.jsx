@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import Header from '../components/Header';
 import Context from '../context/Context';
 import { ROUTE,
@@ -8,13 +9,16 @@ import { ROUTE,
   STATUS,
   PRICE } from '../dataTestedId/CustomerOrdersIds';
 import '../styles/CustomerOrders.css';
+import loginRedirect from '../utils/loginRedirect';
 
 const DATE_CUT_LIMIT = 10;
 
 function CustomerOrders() {
   const { orders, fetchOrders } = useContext(Context);
+  const history = useHistory();
 
   useEffect(() => {
+    loginRedirect(history);
     document.title = 'Orders - Delivery App';
     const user = JSON.parse(localStorage.getItem('user'));
     fetchOrders(user.id, user.token);

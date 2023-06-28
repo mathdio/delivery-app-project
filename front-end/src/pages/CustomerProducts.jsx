@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import Header from '../components/Header';
 import ProductCard from '../components/ProductCard';
 import Context from '../context/Context';
@@ -9,13 +10,22 @@ import {
   CHECKOUT,
 } from '../dataTestedId/CustomerProductsIds';
 import '../styles/CostumerProducts.css';
+import loginRedirect from '../utils/loginRedirect';
 
 function CustomerProducts() {
-  const { products, globalCart, totalPrice, setTotalPrice } = useContext(Context);
+  const { fetchProducts,
+    products,
+    globalCart,
+    totalPrice,
+    setTotalPrice } = useContext(Context);
   const [disabled, setDisabled] = useState(true);
+  const history = useHistory();
 
   useEffect(() => {
+    loginRedirect(history);
     document.title = 'Products - Delivery App';
+
+    fetchProducts();
   }, []);
 
   useEffect(() => {

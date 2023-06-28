@@ -8,6 +8,7 @@ import { ROUTE,
   INVALID } from '../dataTestedId/logInIds';
 import '../styles/logIn.css';
 import logo from '../images/logo.png';
+import loggedRedirect from '../utils/loggedRedirect';
 
 function LogIn() {
   const [email, setEmail] = useState('');
@@ -17,17 +18,8 @@ function LogIn() {
   const history = useHistory();
 
   useEffect(() => {
+    loggedRedirect(history);
     document.title = 'Login - Delivery App';
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (user) {
-      if (user.role === 'customer') {
-        history.push('/customer/products');
-      } else if (user.role === 'administrator') {
-        history.push('/admin/manage');
-      } else if (user.role === 'seller') {
-        history.push('/seller/orders');
-      }
-    }
   }, []);
 
   useEffect(() => {

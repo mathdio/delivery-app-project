@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState, useMemo, useEffect, useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useState, useMemo, useCallback } from 'react';
 import Context from './Context';
 
 const HEADER = (token) => ({
@@ -19,7 +18,6 @@ function Provider({ children }) {
   const [sellers, setSellers] = useState([]);
   const [orders, setOrders] = useState([]);
   const [specificOrder, setSpecificOrder] = useState();
-  const history = useHistory();
 
   const cartTotalValue = useCallback((cart) => {
     const totalValue = cart.reduce((acc, curr) => acc + curr.quantity * curr.price, 0);
@@ -77,7 +75,21 @@ function Provider({ children }) {
     return data;
   };
 
+  const fetchProducts = async () => {
+    const response = await fetch('http://localhost:3001/products');
+    const data = await response.json();
+    setProducts(data);
+  };
+
+  const fetchSellers = async () => {
+    const response = await fetch('http://localhost:3001/users/sellers');
+    const data = await response.json();
+    setSellers(data);
+  };
+
   const contextValue = useMemo(() => ({
+    fetchProducts,
+    fetchSellers,
     products,
     setProducts,
     userName,
@@ -98,30 +110,6 @@ function Provider({ children }) {
     fetchOrdersBySeller,
     handleStatus,
   }), [products, userName, globalCart, totalPrice, sellers, orders, specificOrder]);
-
-  const fetchProducts = async () => {
-    const response = await fetch('http://localhost:3001/products');
-    const data = await response.json();
-    setProducts(data);
-  };
-
-  const fetchSellers = async () => {
-    const response = await fetch('http://localhost:3001/users/sellers');
-    const data = await response.json();
-    setSellers(data);
-  };
-
-  useEffect(() => {
-    if (!localStorage.getItem('user')) {
-      if (history.location.pathname === '/register') {
-        history.push('/register');
-      } else {
-        history.push('/login');
-      }
-    }
-    fetchProducts();
-    fetchSellers();
-  }, []);
 
   return (
     <Context.Provider value={ contextValue }>

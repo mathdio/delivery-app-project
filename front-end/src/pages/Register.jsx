@@ -8,6 +8,7 @@ import { ROUTE,
   INVALID } from '../dataTestedId/registerIds';
 import '../styles/register.css';
 import logo from '../images/logo.png';
+import loggedRedirect from '../utils/loggedRedirect';
 
 function Register() {
   const [name, setName] = useState('');
@@ -18,6 +19,7 @@ function Register() {
   const history = useHistory();
 
   useEffect(() => {
+    loggedRedirect(history);
     document.title = 'Register - Delivery App';
   }, []);
 

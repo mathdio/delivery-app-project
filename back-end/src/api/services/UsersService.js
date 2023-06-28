@@ -27,9 +27,8 @@ const login = async (email, password) => {
 
   if (user) {
     validateEncryption(md5(password), user.password);
+    return { id: user.id, name: user.name, email: user.email, role: user.role };
   }
-
-  return { name: user.name, email: user.email, role: user.role };
 };
 
 const register = async (name, email, password) => {
@@ -45,7 +44,7 @@ const register = async (name, email, password) => {
   });
 
   const plainUser = createdUser.get({ plain: true });
-  return { name: plainUser.name, email: plainUser.email, role: plainUser.role };
+  return { id: plainUser.id, name: plainUser.name, email: plainUser.email, role: plainUser.role };
 };
 
 const getSellers = async () => {

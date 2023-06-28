@@ -9,6 +9,7 @@ import { EMAIL,
   ROLE,
   ROUTE } from '../dataTestedId/AdminManageIds';
 import ManageTable from '../components/ManageTable';
+import loginRedirect from '../utils/loginRedirect';
 
 const CONTENT_TYPE = 'application/json';
 const ALLOW_HEADERS = 'Content-Type, Authorization';
@@ -26,14 +27,11 @@ function AdminManage() {
   const history = useHistory();
 
   useEffect(() => {
+    loginRedirect(history);
     document.title = 'Manager Area- Delivery App';
 
     const localStorageUser = JSON.parse(localStorage.getItem('user'));
-    if (!localStorageUser || !localStorageUser.token) {
-      history.push('/login');
-    } else {
-      setUser(localStorageUser);
-    }
+    setUser(localStorageUser);
   }, []);
 
   const fetchUsers = async () => {

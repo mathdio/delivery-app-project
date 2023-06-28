@@ -11,7 +11,7 @@ import '../styles/AddressDetails.css';
 
 function AddressDetails() {
   const history = useHistory();
-  const { sellers, totalPrice, globalCart } = useContext(Context);
+  const { fetchSellers, sellers, totalPrice, globalCart } = useContext(Context);
   const [user, setUser] = useState({});
   const [seller, setSeller] = useState(null);
   const [address, setAddress] = useState('');
@@ -21,6 +21,8 @@ function AddressDetails() {
   useEffect(() => {
     const localStorageUser = JSON.parse(localStorage.getItem('user'));
     setUser(localStorageUser);
+
+    fetchSellers();
   }, []);
 
   useEffect(() => {
