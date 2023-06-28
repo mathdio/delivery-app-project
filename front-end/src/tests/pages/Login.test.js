@@ -1,13 +1,23 @@
 import React from 'react';
-import { screen, waitFor } from '@testing-library/react';
+import { cleanup, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../helpers/renderWithRouter';
 import renderWithRouterAndContext from '../helpers/renderWithRouterAndContext';
 import App from '../../App';
 
 describe('Login page tests', () => {
+  it('tests if register butotn redirect to /register', () => {
+    renderWithRouterAndContext(<App />, '/login');
+
+    const newAccountButton = screen.getByRole('button', { name: /ainda não tenho conta/i });
+    userEvent.click(newAccountButton);
+
+    const heading = screen.getByRole('heading', { name: /cadastre uma nova conta/i });
+    expect(heading).toBeInTheDocument();
+  });
+
   it('tests if disabled login button turns enabled', () => {
-    renderWithRouter(<App />);
+    renderWithRouterAndContext(<App />, '/login');
 
     const emailInput = screen.getByRole('textbox', { name: /email/i });
     const passwordInput = screen.getByLabelText(/senha/i);
@@ -20,7 +30,7 @@ describe('Login page tests', () => {
   });
 
   it('tests if it is possible to log in', async () => {
-    renderWithRouterAndContext(<App />);
+    renderWithRouterAndContext(<App />, '/login');
 
     const emailInput = screen.getByRole('textbox', { name: /email/i });
     const passwordInput = screen.getByLabelText(/senha/i);
@@ -30,18 +40,9 @@ describe('Login page tests', () => {
     userEvent.type(emailInput, 'zebirita@email.com');
     userEvent.type(passwordInput, '$#zebirita#$');
     userEvent.click(enterButton);
-    // await waitFor(() => {
-    //   expect(heading).not.toBeInTheDocument();
-    // });
-  });
 
-  it('tests if new account button redirect', async () => {
-    renderWithRouter(<App />);
-
-    const newAccountButton = screen.getByRole('button', { name: /ainda não tenho conta/i });
-    userEvent.click(newAccountButton);
-
-    const heading = screen.getByRole('heading', { name: /cadastre uma nova conta/i });
-    expect(heading).toBeInTheDocument();
+    await waitFor(() => {
+      expect(heading).not.toBeInTheDocument();
+    });
   });
 });

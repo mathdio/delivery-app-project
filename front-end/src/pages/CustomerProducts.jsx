@@ -13,13 +13,13 @@ import '../styles/CostumerProducts.css';
 import loginRedirect from '../utils/loginRedirect';
 
 function CustomerProducts() {
+  const [disabled, setDisabled] = useState(true);
+  const history = useHistory();
   const { fetchProducts,
     products,
     globalCart,
     totalPrice,
     setTotalPrice } = useContext(Context);
-  const [disabled, setDisabled] = useState(true);
-  const history = useHistory();
 
   useEffect(() => {
     loginRedirect(history);
