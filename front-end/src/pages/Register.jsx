@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { ROUTE,
   EMAIL,
   NAME,
@@ -88,6 +89,10 @@ function Register() {
         className="Register-logo-img"
       />
       <h1>Cadastre uma nova conta</h1>
+      <p>Já possui uma conta?</p>
+      <Link to="/login">
+        <p>Faça login</p>
+      </Link>
       <form className="Register-form">
         <label htmlFor="name">
           Nome
