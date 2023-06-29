@@ -6,7 +6,10 @@ import App from '../../App';
 import { invalidEmail,
   invalidName,
   invalidPassword,
-  responseRegisterMock } from '../mocks/Register.mock';
+  responseRegisterMock,
+  validName,
+  validEmail,
+  validPassword } from '../mocks/Register.mock';
 
 describe('Register page tests', () => {
   it('tests if link redirect to login page', () => {
@@ -41,9 +44,9 @@ describe('Register page tests', () => {
     const passwordInput = screen.getByLabelText(/password/i);
     const registerButton = screen.getByRole('button', { name: /cadastrar/i });
 
-    userEvent.type(nameInput, 'Test Customer');
-    userEvent.type(emailInput, 'test@email.com');
-    userEvent.type(passwordInput, '123456');
+    userEvent.type(nameInput, validName);
+    userEvent.type(emailInput, validEmail);
+    userEvent.type(passwordInput, validPassword);
     expect(registerButton).toBeEnabled();
   });
 
@@ -62,9 +65,9 @@ describe('Register page tests', () => {
       const passwordInput = screen.getByLabelText(/password/i);
       const registerButton = screen.getByRole('button', { name: /cadastrar/i });
 
-      userEvent.type(nameInput, 'Test Customer');
-      userEvent.type(emailInput, 'test@email.com');
-      userEvent.type(passwordInput, '123456');
+      userEvent.type(nameInput, validName);
+      userEvent.type(emailInput, validEmail);
+      userEvent.type(passwordInput, validPassword);
       userEvent.click(registerButton);
 
       await waitFor(() => {
@@ -88,9 +91,9 @@ describe('Register page tests', () => {
     const passwordInput = screen.getByLabelText(/password/i);
     const registerButton = screen.getByRole('button', { name: /cadastrar/i });
 
-    userEvent.type(nameInput, 'Test Customer');
-    userEvent.type(emailInput, 'test@email.com');
-    userEvent.type(passwordInput, '123456');
+    userEvent.type(nameInput, validName);
+    userEvent.type(emailInput, validEmail);
+    userEvent.type(passwordInput, validPassword);
     userEvent.click(registerButton);
 
     await waitFor(() => {
