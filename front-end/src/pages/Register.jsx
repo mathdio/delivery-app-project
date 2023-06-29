@@ -58,13 +58,13 @@ function Register() {
       },
     );
 
-    const data = await response.json();
-
     const CONFLICT_STATUS = 409;
     if (response.status === CONFLICT_STATUS) {
       setInvalidRegister(true);
       return 0;
     }
+
+    const data = await response.json();
 
     const user = {
       id: data.id,
