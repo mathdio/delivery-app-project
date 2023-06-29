@@ -24,7 +24,7 @@ function Provider({ children }) {
     setGlobalCart(totalValue);
   }, []);
 
-  const fetchOrders = async (id, token) => {
+  const fetchOrders = useCallback(async (id, token) => {
     const response = await fetch(
       `http://localhost:3001/sales/${id}`,
       {
@@ -34,9 +34,9 @@ function Provider({ children }) {
     );
     const data = await response.json();
     setOrders(data);
-  };
+  }, []);
 
-  const fetchOrderById = async (id, token) => {
+  const fetchOrderById = useCallback(async (id, token) => {
     const response = await fetch(
       `http://localhost:3001/sales/order/${id}`,
       {
@@ -48,9 +48,9 @@ function Provider({ children }) {
     );
     const data = await response.json();
     setSpecificOrder(data);
-  };
+  }, []);
 
-  const fetchOrdersBySeller = async (id, token) => {
+  const fetchOrdersBySeller = useCallback(async (id, token) => {
     const response = await fetch(
       `http://localhost:3001/sales/seller/${id}`,
       {
@@ -60,9 +60,9 @@ function Provider({ children }) {
     );
     const data = await response.json();
     setOrders(data);
-  };
+  }, []);
 
-  const handleStatus = async (id, status, token) => {
+  const handleStatus = useCallback(async (id, status, token) => {
     const response = await fetch(
       'http://localhost:3001/sales/status-change',
       {
@@ -73,19 +73,19 @@ function Provider({ children }) {
     );
     const data = await response.json();
     return data;
-  };
+  }, []);
 
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     const response = await fetch('http://localhost:3001/products');
     const data = await response.json();
     setProducts(data);
-  };
+  }, []);
 
-  const fetchSellers = async () => {
+  const fetchSellers = useCallback(async () => {
     const response = await fetch('http://localhost:3001/users/sellers');
     const data = await response.json();
     setSellers(data);
-  };
+  }, []);
 
   const contextValue = useMemo(() => ({
     fetchProducts,
