@@ -39,6 +39,8 @@ Both front-end and back-end layers have some tests implemented.
 - Mocked tests
 
 ## 👥 Developed in group with:
-- 
+- [Cláudio Melgaço](https://github.com/melgacoc)
+- [Isabelle Strojake](https://github.com/isabellestrojake)
+- [Talita Saez](https://github.com/talitasaez)
 
 
