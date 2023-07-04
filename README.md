@@ -30,4 +30,15 @@ Both front-end and back-end layers have some tests implemented.
 <a href="https://sequelize.org" target="_blank" rel="noreferrer"><img src="https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white" alt="Sequelize" /></a>
 <a href="https://sinonjs.org" target="_blank" rel="noreferrer"><img src="https://img.shields.io/badge/sinon.js-323330?style=for-the-badge&logo=sinon" alt="Sinon.js" /></a>
 
+## 🎯 Used skills
+- REST API building
+- CRUD using ORM.
+- MySQL data modeling using Sequelize
+- Tables creation and association using Sequelize models
+- Integration tests
+- Mocked tests
+
+## 👥 Developed in group with:
+- 
+
 
