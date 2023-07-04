@@ -79,3 +79,15 @@ In front-end folder terminal, run:
 npm start
 ```
 In this point, a new tab must open in your default web browser and you can use the application.
+
+## 🧪 Testing
+You must run the testing commands in back-end or front-end folders terminals. 
+To simply test the application, run:
+```
+npm run test:coverage:json
+```
+To additionally get a coverage report, run:
+```
+npm run test:coverage
+```
+
