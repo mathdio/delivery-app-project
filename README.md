@@ -1,6 +1,6 @@
 > ## :construction: ⚠️ Project style under construction ⚠️ :construction:
 >
-> ## The stylization is under construction, thus the front-end layer experience must not be the ideal one.
+> ## The stylization is under construction, thus the front-end user experience must not be the ideal one.
  
 # 🛵 Delivery App
 A delivery-app webpage developed as a [Trybe](https://www.betrybe.com) Project.
