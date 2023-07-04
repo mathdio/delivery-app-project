@@ -44,3 +44,9 @@ Both front-end and back-end layers have some tests implemented.
 - [Talita Saez](https://github.com/talitasaez)
 
 ## 🏁 Getting started
+### 🐳 Installing Docker
+You can use Docker to containerizing the  MySQL database. You can see [here](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04-pt) or in the [docs](https://docs.docker.com/compose/install/) how to install it.
+MySQL Docker images available [here](https://hub.docker.com/_/mysql).
+
+### ⬇️ Installing the dependencies
+Node.js version must be 16 or higher, otherwise the isntallation will fail to prevent version conflict. You can use [nvm](https://github.com/nvm-sh/nvm#installing-and-updating) to Node.js version management.
