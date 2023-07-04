@@ -50,3 +50,32 @@ MySQL Docker images available [here](https://hub.docker.com/_/mysql).
 
 ### ⬇️ Installing the dependencies
 Node.js version must be 16 or higher, otherwise the isntallation will fail to prevent version conflict. You can use [nvm](https://github.com/nvm-sh/nvm#installing-and-updating) to Node.js version management.
+In project root, back-end folder and front-end folder terminals, run:
+```
+npm install
+```
+
+### 🌱 Defining back-end enviroment variables
+In back-end folder, create a `.env` file with the following content:
+```
+NODE_ENV=development
+API_PORT=3001
+MYSQL_HOST=localhost
+MYSQL_PORT=3306
+MYSQL_USER=root
+MYSQL_PASSWORD=senha-mysql
+MYSQL_DB_NAME=delivery-app
+EVAL_ALWAYS_RESTORE_DEV_DB=true
+```
+
+### 🏃‍♀ Running the application
+You database must be settled. If using Docker, the container must be running.
+In back-end folder terminal, run:
+```
+npm run dev
+```
+In front-end folder terminal, run:
+```
+npm start
+```
+In this point, a new tab must open in your default web browser and you can use the application.
