@@ -6,7 +6,7 @@ import { ROUTE,
   BUTTON,
   REGISTER,
   INVALID } from '../dataTestedId/logInIds';
-import '../styles/logIn.css';
+import styles from '../styles/Login.module.css';
 import logo from '../images/logo.png';
 import loggedRedirect from '../utils/loggedRedirect';
 
@@ -84,15 +84,24 @@ function LogIn() {
   };
 
   return (
-    <div className="Login-main-div">
-      <img src={ logo } alt="" className="Login-logo-img" />
-      <h1>Entre na sua conta</h1>
-      <form className="Login-form">
+    <main className={ styles['main-container'] }>
+      <div className={ styles['logo-container'] }>
+        <img src={ logo } alt="" className={ styles['logo-img'] } />
+        <h1 className={ styles.title }>Delivery App</h1>
+        <a target="_blank" href="https://www.flaticon.com/free-icons/shipment" title="shipment icons" rel="noreferrer">
+          Shipment icons created by Iconjam - Flaticon
+        </a>
+      </div>
+      <form className={ styles.form }>
+        <h1 className={ styles['form-heading'] }>Entre na sua conta</h1>
+
         <label
           htmlFor="email"
+          className={ styles['form-label'] }
         >
           Email
           <input
+            className={ styles['form-input'] }
             data-testid={ `${ROUTE}${EMAIL}` }
             type="email"
             id="email"
@@ -103,9 +112,11 @@ function LogIn() {
         </label>
         <label
           htmlFor="password"
+          className={ styles['form-label'] }
         >
           Senha
           <input
+            className={ styles['form-input'] }
             data-testid={ `${ROUTE}${PASSWORD}` }
             type="password"
             id="password"
@@ -114,9 +125,9 @@ function LogIn() {
             onChange={ ({ target }) => setPassword(target.value) }
           />
         </label>
-        <div className="Login-btn-container">
+        <div className={ styles['form-btn-container'] }>
           <button
-            className="btn btn-success"
+            className={ styles.btn }
             data-testid={ `${ROUTE}${BUTTON}` }
             type="button"
             id="subButton"
@@ -127,9 +138,11 @@ function LogIn() {
           >
             Entrar
           </button>
-          <Link to="/register">
+          <Link
+            to="/register"
+            className={ styles['link-btn'] }
+          >
             <button
-              className="btn btn-outline-success"
               data-testid={ `${ROUTE}${REGISTER}` }
               name="registerButton"
               id="registerButton"
@@ -151,7 +164,7 @@ function LogIn() {
           </section>
         )
       }
-    </div>
+    </main>
   );
 }
 

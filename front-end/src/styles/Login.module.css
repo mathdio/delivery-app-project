@@ -1,0 +1,80 @@
+.main-container {
+  align-items: center;
+  background-color: rgb(30, 26, 43);
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  justify-content: space-evenly;
+  width: 100vw;
+
+}
+
+.logo-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 50%;
+  justify-content: center;
+}
+
+.logo-img {
+  width: 50%;
+}
+
+.title {
+  color: rgb(246, 169, 25);
+}
+
+.logo-container a {
+  color: rgb(246, 169, 25);
+  margin-top: 50px;
+  text-decoration: none;
+}
+
+.form {
+  align-items: center;
+  background: linear-gradient(90deg, rgba(246, 169, 25, 1) 0%, rgba(238, 94, 35, 1) 35%, rgba(233, 55, 40, 1) 100%);
+  border-radius: 10px;
+  color: rgb(30, 26, 43);
+  display: flex;
+  flex-direction: column;
+  height: 50%;
+  justify-content: space-evenly;
+  width: 40%;
+}
+
+.form-heading {
+  background: linear-gradient(90deg, rgba(246, 169, 25, 1) 0%, rgba(238, 94, 35, 1) 35%, rgba(233, 55, 40, 1) 100%);
+  text-align: center;
+  width: 100%;
+}
+
+.form-label {
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  width: 60%;
+}
+
+.form-input {
+  border-radius: 10px;
+  height: 40px;
+  width: 100%;
+}
+
+.form-btn-container {
+  align-items: center;
+  border: blue 1px solid;
+  display: flex;
+  flex-direction: column;
+  height: 30%;
+  justify-content: space-evenly;
+  width: 60%;
+}
+
+.btn, .link-btn {
+  border-radius: 10px;
+  height: 40px;
+  width: 100%;
+}
+
